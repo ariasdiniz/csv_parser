@@ -1,5 +1,8 @@
 /.idea
-/vscode
+/.vscode
 csv.c
 data.csv
 main
+CMake*
+cmake_install.cmake
+Makefile
