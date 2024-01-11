@@ -29,6 +29,14 @@ char *readline(FILE *file) {
   return line;
 }
 
+/*
+  Parse a CSV line and return a pointer with each field.
+
+  @param char *line The unparsed CSV line.
+  @param char *col_separator The character separating the columns.
+  
+  @return char ** The pointer containing every separated field from the line.
+*/
 char **parseline(char *line, char* col_separator) {
   if (line == NULL) {
     return NULL;
@@ -77,6 +85,10 @@ char **parseline(char *line, char* col_separator) {
   return fields;
 }
 
+/*
+  Free the memory of the parseline function
+  @param char **line The pointer returned from parseline function.
+*/
 void freeparsedline(char **line) {
   for (int i=0; i<CSV_PARSER_MAX_FIELDS; i++) {
     free(line[i]);
