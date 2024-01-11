@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define CSV_PARSER_QUOTE_FLAG 0x001
-#define CSV_PARSER_MAX_FIELDS 30
-#define CSV_PARSER_MAX_FIELD_LEN 1024
-
 /*
   Read a line from a file. Subsequent calls of this function on the same
   file will read its next lines until EOF.
@@ -60,9 +56,9 @@ char **parseline(char *line, char* col_separator) {
   char *current_item = fields[0];
 
   for (int i = 0; line[i] != '\0' && line[i] != '\n'; i++) {
-    if (line[i] == '\"' && flag == 0) {
+    if (line[i] == '\"' && !flag) {
       flag |= CSV_PARSER_QUOTE_FLAG;
-    } else {
+    } else if (line[i] == '\"' && flag) {
       flag &= ~CSV_PARSER_QUOTE_FLAG;
     }
     if (flag) {
