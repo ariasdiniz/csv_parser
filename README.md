@@ -17,15 +17,15 @@ Aria's CSV Parser is a lightweight, easy-to-use CSV file parsing library written
 - Basic knowledge of C and file handling in C.
 
 ### Installation
-1. Clone the repository or download the source code.
-2. Include `parser.h` in your project.
+1. Clone the repository or download the source code to your software's `lib` folder.
+2. Include `csvparser.h` in your project.
 3. Compile your project with the CSV parser source files.
 
 ### Usage
 
 #### Reading a Line from a CSV File
 ```c
-#include "parser.h"
+#include "csvparser.h"
 #include <stdio.h>
 
 int main() {
@@ -43,7 +43,7 @@ int main() {
 
 #### Parsing a CSV Line
 ```c
-#include "parser.h"
+#include "csvparser.h"
 
 int main() {
     char *csvLine = "Field1,Field2,Field3";
