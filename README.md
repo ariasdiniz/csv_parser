@@ -31,12 +31,10 @@ Aria's CSV Parser is a lightweight, easy-to-use CSV file parsing library written
 int main() {
     FILE *file = fopen("yourfile.csv", "r");
     char *line;
-    char **parsedline;
     while ((line = readline(file)) != NULL) {
-        parsedline = parseline(line, ",");
+        // Your code
         printf("%s", line);
         free(line);
-        free(parsedline)
     }
     fclose(file);
     return 0;
