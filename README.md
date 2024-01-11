@@ -59,6 +59,22 @@ int main() {
 }
 ```
 
+#### Changing default size of constants
+
+In order to facilitate usage, some constants are defined to parse the lines and fields of the files.
+Their default values are:
+
+```c
+#define CSV_PARSER_MAX_LINE_LENGTH 1024
+#define CSV_PARSER_MAX_FIELDS 30
+#define CSV_PARSER_MAX_FIELD_LEN 1024
+```
+
+If you are working in a setting with limited memory, or just want to adjust the constants to your files,
+you can redefine them as you like.
+
+`CSV_PARSER_MAX_LINE_LENGTH` and `CSV_PARSER_MAX_FIELD_LEN` are `int` representing the maximum number of bytes, while `CSV_PARSER_MAX_FIELDS` is an `int` representing the maximum number of CSV columns it will handle.
+
 ## Contributing
 Contributions are welcome! Feel free to submit pull requests, open issues, or suggest new features.
 
