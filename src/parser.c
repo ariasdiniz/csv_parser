@@ -29,6 +29,21 @@ char *readline(FILE *file) {
   return line;
 }
 
+void allocateparsedarray(char **fields) {
+  memset(fields, '\0', CSV_PARSER_MAX_FIELDS * sizeof(char*));
+
+  for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
+    fields[i] = malloc(CSV_PARSER_MAX_FIELD_LEN * sizeof(char));
+    if (fields[i] == NULL) {
+      for (int j = 0; j < i; j++) {
+        free(fields[j]);
+      }
+      free(fields);
+    }
+    memset(fields[i], '\0', CSV_PARSER_MAX_FIELD_LEN * sizeof(char));
+  }
+}
+
 /*
   Parse a CSV line and return a pointer with each field.
 
@@ -46,20 +61,7 @@ char **parseline(char *line, char* col_separator) {
   if (fields == NULL) {
     return NULL;
   }
-  memset(fields, '\0', CSV_PARSER_MAX_FIELDS * sizeof(char*));
-
-  for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
-    fields[i] = malloc(CSV_PARSER_MAX_FIELD_LEN * sizeof(char));
-    if (fields[i] == NULL) {
-      for (int j = 0; j < i; j++) {
-        free(fields[j]);
-      }
-      free(fields);
-      return NULL;
-    }
-    memset(fields[i], '\0', CSV_PARSER_MAX_FIELD_LEN * sizeof(char));
-  }
-
+  allocateparsedarray(fields);
   int flag = 0, current_index = 0, field_index = 0;
   char *current_item = fields[0];
 
