@@ -1,7 +1,7 @@
 /.idea
 /.vscode
 csv.c
-data.csv
+*.csv
 main
 CMake*
 cmake_install.cmake

@@ -14,11 +14,11 @@
   @returns `char *` containing the line read from the file. 
   Don't forget to `free`the result after usage.
 */
-char *readline(FILE *file) {
+char *readline(FILE *file, char *line) {
   if (file == NULL) {
     return NULL;
   }
-  char *line = (char *)malloc(sizeof(char)*CSV_PARSER_MAX_LINE_LENGTH);
+  line = line == NULL ? (char *)malloc(sizeof(char)*CSV_PARSER_MAX_LINE_LENGTH) : line;
   if (line == NULL) {
     return NULL;
   }
