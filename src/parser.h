@@ -7,7 +7,7 @@
 #define CSV_PARSER_MAX_FIELD_LEN 1024
 #include <stdio.h>
 
-char *readline(FILE *file);
+char *readline(FILE *file, char *line);
 char **parseline(char *line, char *col_separator);
 void freeparsedline(char **line);
 

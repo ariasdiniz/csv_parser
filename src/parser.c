@@ -5,13 +5,17 @@
 
 /*
   Read a line from a file. Subsequent calls of this function on the same
-  file will read its next lines until EOF.
+  file will read its next lines until EOF. If line is NULL, memory will
+  be allocated for it. If not, line will be overwritten. Recommended to
+  use a char *line on function calling instead of NULL for better 
+  performance.
 
   Returns NULL when file is a null file pointer
   Returns NULL when reach EOF
 
   @param file A pointer to a file.
-  @returns `char *` containing the line read from the file. 
+  @param line A pointer to a char
+  @returns `char *` containing the line read from the file.
   Don't forget to `free`the result after usage.
 */
 char *readline(FILE *file, char *line) {
