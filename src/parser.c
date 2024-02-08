@@ -34,8 +34,6 @@ char *readline(FILE *file, char *line) {
 }
 
 void allocateparsedarray(char **fields) {
-  memset(fields, '\0', CSV_PARSER_MAX_FIELDS * sizeof(char*));
-
   for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
     fields[i] = malloc(CSV_PARSER_MAX_FIELD_LEN * sizeof(char));
     if (fields[i] == NULL) {
@@ -61,7 +59,7 @@ char **parseline(char *line, char* col_separator) {
     return NULL;
   }
   char *col_sep = (col_separator == NULL) ? "," : col_separator;
-  char **fields = malloc(CSV_PARSER_MAX_FIELDS * sizeof(char*));
+  char **fields = malloc(CSV_PARSER_MAX_FIELDS * sizeof(char *));
   if (fields == NULL) {
     return NULL;
   }

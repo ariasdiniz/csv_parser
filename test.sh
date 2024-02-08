@@ -29,7 +29,7 @@ gcc -o tests $all_files
 
 # Run the program
 chmod u+x tests
-./tests
+valgrind --leak-check=yes ./tests
 
 # Remove the executable
 rm tests
