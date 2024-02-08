@@ -30,7 +30,7 @@ Aria's CSV Parser is a lightweight, easy-to-use CSV file parsing library written
 
 int main() {
     FILE *file = fopen("yourfile.csv", "r");
-    char *line;
+    char *line = NULL;
     while ((line = readline(file, line)) != NULL) {
         // Your code
         printf("%s", line);
@@ -47,14 +47,15 @@ int main() {
 
 int main() {
     char *csvLine = "Field1,Field2,Field3";
-    char **fields = parseline(csvLine, ",");
+    char **fields = NULL;
+    fields = parseline(csvLine, ",", fields);
     if (fields != NULL) {
         // Process fields
         for (int i = 0; fields[i] != NULL; i++) {
             printf("%s\n", fields[i]);
         }
-        freeparsedline(fields);
     }
+    freeparsedline(fields);
     return 0;
 }
 ```

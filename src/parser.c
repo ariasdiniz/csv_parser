@@ -54,18 +54,20 @@ void allocateparsedarray(char **fields) {
   
   @return char ** The pointer containing every separated field from the line.
 */
-char **parseline(char *line, char* col_separator) {
+char **parseline(char *line, char* col_separator, char **buffer) {
   if (line == NULL) {
     return NULL;
   }
-  char *col_sep = (col_separator == NULL) ? "," : col_separator;
-  char **fields = malloc(CSV_PARSER_MAX_FIELDS * sizeof(char *));
-  if (fields == NULL) {
-    return NULL;
+  if (buffer == NULL) {
+    buffer = malloc(CSV_PARSER_MAX_FIELDS * sizeof(char *));
+    if (buffer == NULL) {
+      return NULL;
+    }
+    allocateparsedarray(buffer);
   }
-  allocateparsedarray(fields);
+  char *col_sep = (col_separator == NULL) ? "," : col_separator;
   int flag = 0, current_index = 0, field_index = 0;
-  char *current_item = fields[0];
+  char *current_item = buffer[0];
 
   for (int i = 0; line[i] != '\0' && line[i] != '\n'; i++) {
     if (line[i] == '\"' && !flag) {
@@ -77,16 +79,16 @@ char **parseline(char *line, char* col_separator) {
       current_item[current_index] = line[i];
       current_index++;
     } else if (line[i] == *col_sep && !flag) {
-      fields[field_index] = current_item;
+      buffer[field_index] = current_item;
       field_index++;
       current_index = 0;
-      current_item = fields[field_index];
+      current_item = buffer[field_index];
     } else {
       current_item[current_index] = line[i];
       current_index++;
     }
   }
-  return fields;
+  return buffer;
 }
 
 /*

@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 char *readline(FILE *file, char *line);
-char **parseline(char *line, char *col_separator);
+char **parseline(char *line, char *col_separator, char **buffer);
 void freeparsedline(char **line);
 
 #endif //CSV_PARSER_PARSER_H

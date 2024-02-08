@@ -38,14 +38,16 @@ void test_readline_null_file_pointer() {
 }
 
 void test_parseline_null_input() {
-  char **result = parseline(NULL, NULL);
+  char **result = NULL;
+  result = parseline(NULL, NULL, result);
   assert(result == NULL);
   printf("Test parseline with null input passed\n");
 }
 
 void test_parseline_default_separator() {
   char line[] = "field1,field2,field3";
-  char **result = parseline(line, NULL);
+  char **result = NULL;
+  result = parseline(line, NULL, result);
   assert(strcmp(result[0], "field1") == 0);
   assert(strcmp(result[1], "field2") == 0);
   assert(strcmp(result[2], "field3") == 0);
@@ -55,7 +57,8 @@ void test_parseline_default_separator() {
 
 void test_parseline_custom_separator() {
   char line[] = "field1;field2;field3";
-  char **result = parseline(line, ";");
+  char **result = NULL;
+  result = parseline(line, ";", result);
   assert(strcmp(result[0], "field1") == 0);
   assert(strcmp(result[1], "field2") == 0);
   assert(strcmp(result[2], "field3") == 0);
@@ -65,7 +68,8 @@ void test_parseline_custom_separator() {
 
 void test_parseline_with_quotes() {
   char *line = "\"some, words\",field2";
-  char **result = parseline(line, NULL);
+  char **result = NULL;
+  result = parseline(line, NULL, result);
   assert(strcmp(result[0], "\"some, words\"") == 0);
   assert(strcmp(result[1], "field2") == 0);
   for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
@@ -77,7 +81,8 @@ void test_parseline_with_quotes() {
 
 void test_parseline_empty_input() {
   char *line = "";
-  char **result = parseline(line, NULL);
+  char **result = NULL;
+  result = parseline(line, NULL, result);
   assert(result[0][0] == '\0');
   for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
     free(result[i]);
