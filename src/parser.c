@@ -64,6 +64,10 @@ char **parseline(char *line, char* col_separator, char **buffer) {
       return NULL;
     }
     allocateparsedarray(buffer);
+  } else {
+    for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
+      memset(buffer[i], '\0', CSV_PARSER_MAX_FIELD_LEN);
+    }
   }
   char *col_sep = (col_separator == NULL) ? "," : col_separator;
   int flag = 0, current_index = 0, field_index = 0;
