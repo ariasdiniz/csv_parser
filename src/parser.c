@@ -64,10 +64,6 @@ char **parseline(char *line, char* col_separator, char **buffer) {
       return NULL;
     }
     allocateparsedarray(buffer);
-  } else {
-    for (int i = 0; i < CSV_PARSER_MAX_FIELDS; i++) {
-      memset(buffer[i], '\0', CSV_PARSER_MAX_FIELD_LEN);
-    }
   }
   char *col_sep = (col_separator == NULL) ? "," : col_separator;
   int flag = 0, current_index = 0, field_index = 0;
@@ -81,6 +77,7 @@ char **parseline(char *line, char* col_separator, char **buffer) {
     }
     if (flag) {
       current_item[current_index] = line[i];
+      current_item[current_index + 1] = '\0';
       current_index++;
     } else if (line[i] == *col_sep && !flag) {
       buffer[field_index] = current_item;
@@ -89,6 +86,7 @@ char **parseline(char *line, char* col_separator, char **buffer) {
       current_item = buffer[field_index];
     } else {
       current_item[current_index] = line[i];
+      current_item[current_index + 1] = '\0';
       current_index++;
     }
   }
