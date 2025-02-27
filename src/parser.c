@@ -53,11 +53,7 @@ char **parseline(char *line, char* col_separator, char **buffer) {
     } else if (line[i] == '\"' && flag) {
       flag &= ~CSV_PARSER_QUOTE_FLAG;
     }
-    if (flag) {
-      current_item[current_index] = line[i];
-      current_item[current_index + 1] = '\0';
-      current_index++;
-    } else if (line[i] == *col_sep && !flag) {
+    if (line[i] == *col_sep && !flag) {
       buffer[field_index] = current_item;
       field_index++;
       current_index = 0;
